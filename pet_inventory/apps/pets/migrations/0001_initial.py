@@ -3,6 +3,9 @@
 from django.db import migrations, models
 
 
+"""
+Migration class from django
+"""
 class Migration(migrations.Migration):
 
     initial = True

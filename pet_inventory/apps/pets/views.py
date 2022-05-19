@@ -4,23 +4,16 @@ from .models import Pet
 # Create your views here.
 
 
-"""
-Dashboard View
-"""
 class dashboard(views.View):
-    """
-    Get method for class Dashboard
-    Return the dashboard template
-    """
+    """Dashboard View"""
+
     def get(self, request):
+        """Get method for class Dashboard, Return the dashboard template"""
         pets = Pet.objects.all()
         return render(request, 'pets/dashboard.html', {'pets': pets})
 
-    """
-    Post method for class Dashboard
-    Register a pet and return the dashboard template
-    """
     def post(self, request):
+        """Post method for class Dashboard, Register a pet and return the dashboard template"""
         name = request.POST['name']
         species = request.POST['species']
         age = request.POST['age']
@@ -31,37 +24,26 @@ class dashboard(views.View):
         return redirect('/pets/dashboard')
 
 
-"""
-Eliminar Pets View
-"""
 class eliminarPets(views.View):
-    """
-    Get method for class EliminarPet
-    Delete a Pet
-    """
+    """Eliminar Pets View"""
+
     def get(self, request, id):
+        """Get method for class EliminarPet, Delete a Pet"""
         pet = Pet.objects.get(id=id)
         pet.delete()
         return redirect('/pets/dashboard')
 
 
-"""
-Editar Pets View
-"""
 class editarPets(views.View):
-    """
-    Get method for class EditarPet
-    Return editarPet template
-    """
+    """Editar Pets View"""
+
     def get(self, request, id):
+        """Get method for class EditarPet, Return editarPet template"""
         pet = Pet.objects.get(id=id)
         return render(request, 'pets/editarPet.html', {'pet': pet})
 
-    """
-    Post method for class Editar
-    Edit a pet and return the dashboard template    
-    """
     def post(self, request):
+        """Post method for class Editar, Edit a pet and return the dashboard template"""
         pet = Pet.objects.filter(id=request.POST['id']).first()
         print(pet)
         pet.name = request.POST['name']
